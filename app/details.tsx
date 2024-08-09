@@ -5,7 +5,7 @@ import {Stack} from 'expo-router';
 import {t} from '../src/STRINGS';
 import {FlashList} from '@shopify/flash-list';
 import {View} from 'react-native';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 
 const Container = styled.View`
   flex: 1;
@@ -53,6 +53,11 @@ const DATA = [
 export default function Details(): JSX.Element {
   const [data, setData] = useState(DATA);
 
+  const keyExtractor = useCallback(
+    (item: any, i: number) => `${i}-${item.title}`,
+    [],
+  );
+
   useEffect(() => {
     setTimeout(() => {
       setData(DATA.concat(DATA));
@@ -69,7 +74,7 @@ export default function Details(): JSX.Element {
       <Content>
         <FlashList
           data={data}
-          keyExtractor={(item) => item.title}
+          keyExtractor={keyExtractor}
           renderItem={({item}) => (
             <View
               style={css`
