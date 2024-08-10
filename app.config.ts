@@ -52,6 +52,14 @@ export default ({config}: ConfigContext): ExpoConfig => ({
         ],
       },
     ],
+    [
+      'expo-build-properties',
+      {
+        // https://github.com/software-mansion/react-native-screens/issues/2219
+        ios: {newArchEnabled: true},
+        android: {newArchEnabled: true},
+      },
+    ],
   ],
   experiments: {
     typedRoutes: true,

@@ -1,12 +1,11 @@
 import {useEffect, useState} from 'react';
 import type {ColorSchemeName} from 'react-native';
 import {Platform, useColorScheme} from 'react-native';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {GestureHandlerRootView, RectButton} from 'react-native-gesture-handler';
 import {dark, light} from '@dooboo-ui/theme';
 import styled, {css} from '@emotion/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Icon, useDooboo} from 'dooboo-ui';
-import CustomPressable from 'dooboo-ui/uis/CustomPressable';
 import StatusBarBrightness from 'dooboo-ui/uis/StatusbarBrightness';
 import {Stack, useRouter} from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -16,7 +15,6 @@ import RootProvider from '../src/providers';
 import {
   AsyncStorageKey,
   COMPONENT_WIDTH,
-  delayPressIn,
   WEB_URL,
 } from '../src/utils/constants';
 
@@ -63,8 +61,7 @@ function Layout(): JSX.Element | null {
             },
             headerLeft: ({canGoBack}) =>
               canGoBack && (
-                <CustomPressable
-                  delayHoverIn={delayPressIn}
+                <RectButton
                   hitSlop={{top: 8, left: 8, right: 8, bottom: 8}}
                   onPress={() =>
                     canGoBack
@@ -87,7 +84,7 @@ function Layout(): JSX.Element | null {
                   }
                 >
                   <Icon name="CaretLeft" size={24} />
-                </CustomPressable>
+                </RectButton>
               ),
           }}
         >
